@@ -1,0 +1,74 @@
+{
+	"plugin_id": "togglechain",
+	"name_fr": "ToggleChain",
+	"icon": "togglechain.png",
+	"version": "1.0",
+	"creation_date": "2018-03-16",
+	"modification_date": "2018-03-16",
+	"author": "Influman",
+	"description_fr": "Basculer successivement entre les valeurs d'un périphérique",
+	"description_en": "",
+	"description_es": "",
+	"description_it": "",
+	"description_de": "",
+	"forum_link": "",
+	"parameters":
+	[
+		{
+			"parameter": "NAME", 
+			"description": "Nom du périphérique",
+			"xtype": "textfield",
+			"default_value": "Lampe 1",
+			"field": "width:200, allowBlank:false"
+		},
+		{
+			"parameter": "device_api",
+			"description": "Périphérique à basculer",
+			"xtype": "combo",
+			"field": "store : getCombo('/json/list_all.php?value_type=list'), displayField: 'label', valueField: 'id', typeAhead: true, forceSelection: true, triggerAction: 'all', selectOnFocus: true, editable: false, shadow:true, mode: 'local', width: 250, listWidth: 300, allowBlank: true"
+    },
+    {
+      "parameter": "value_states",
+      "description": "Valeurs successives",
+			"xtype": "textfield",
+			"default_value": "0,50,100",
+			"field": "width:200, allowBlank:false"
+    }
+    ],
+	"scripts":
+	[
+		{
+			"name": "togglechain.php"
+		}
+	],
+	"devices": 
+  [
+		
+{
+			"device_id": "periph",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "plugin.parameters.NAME (ToggleChain)",
+			"icon": "toggle.png",
+			"utilisation_id": "43",
+			"parameters":
+			{
+				"VAR1": "plugin.parameters.device_api",
+				"VAR2": "plugin.parameters.value_states",
+				"VAR3": "",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "",
+				"RAW_XPATH": "",
+				"POLLING": "0"
+			},
+			"values":
+			[
+				{ "value": "1", "description": "Next", "icon": "togglechain.png", "http_url": "http://localhost/script/?exec=togglechain.php", "http_type": "GET",  "http_params": "&periph=[VAR1]&valeurs=[VAR2]" }
+			]
+    }
+  ]
+}
+
+
+
